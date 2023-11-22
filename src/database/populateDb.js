@@ -26,13 +26,22 @@ const populateDb = async () => {
         )}", "Gonzalo", "normal")
     `);
 
-    console.log("Inserting posts...");
+    console.log("Inserting comida...");
 
     await pool.query(`
-        INSERT INTO posts (title, description, userId) VALUES 
-        ("Mi viaje a Ibiza", "Genial para salir de fiesta", 1),
-        ("New York", "Es una ciudad muy chula, viaje inolvidable", 2),
-        ("Madrid", "Me gustó bastante, pero se nota demasiado estrés", 3)
+        INSERT INTO comida (title, description, userId) VALUES 
+        ("Hamburguesa XL", "La mejor hamburguesa de la zona", 1),
+        ("Croquetas de Jamón", "Croquetas de jamon ibérico 100%", 2),
+        ("Ensalada Mixta", "Ensalada básica", 3)
+    `);
+
+    console.log("Inserting comentarios...");
+
+    await pool.query(`
+    INSERT INTO comida_comentarios (comentario, userId, comidaId) VALUES
+    ('Comentario en Plato 1', 1, 1),
+    ('Comentario en Plato 2', 2, 2),
+    ('Comentario en Plato 3', 3, 3)
     `);
 
     console.log("Inserting likes...");
