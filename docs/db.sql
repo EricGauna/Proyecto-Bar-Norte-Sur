@@ -1,6 +1,7 @@
-CREATE DATABASE travels_app;
+DROP DATABASE bar_norte_sur;
+CREATE DATABASE bar_norte_sur;
 
-USE travels_app;
+USE bar_norte_sur;
 
 CREATE TABLE users (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +13,7 @@ CREATE TABLE users (
     role ENUM("admin", "normal") DEFAULT "normal"
 );
 
-CREATE TABLE posts (
+CREATE TABLE comida (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     description VARCHAR(5000) NOT NULL,
@@ -20,17 +21,26 @@ CREATE TABLE posts (
     FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE post_images (
+CREATE TABLE comida_images (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     image VARCHAR(100) NOT NULL,
-    postId INT UNSIGNED NOT NULL,
-    FOREIGN KEY (postId) REFERENCES posts (id) ON DELETE CASCADE
+    comidaId INT UNSIGNED NOT NULL,
+    FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
+);
+
+CREATE TABLE comida_comentarios (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    comentario TEXT,
+    userId INT UNSIGNED NOT NULL,
+    comidaId INT UNSIGNED NOT NULL,
+    FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
 );
 
 CREATE TABLE likes (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     userId INT UNSIGNED NOT NULL,
-    postId INT UNSIGNED NOT NULL,
+    comidaId INT UNSIGNED NOT NULL,
     FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (postId) REFERENCES posts (id) ON DELETE CASCADE
+    FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
 );

@@ -10,8 +10,9 @@ const initDb = async () => {
     console.log("Deleting tables...");
 
     await pool.query("DROP TABLE IF EXISTS likes;");
-    await pool.query("DROP TABLE IF EXISTS post_images;");
-    await pool.query("DROP TABLE IF EXISTS posts;");
+    await pool.query("DROP TABLE IF EXISTS comida_images;");
+    await pool.query("DROP TABLE IF EXISTS comida_comentarios;");
+    await pool.query("DROP TABLE IF EXISTS comida;");
     await pool.query("DROP TABLE IF EXISTS users;");
 
     console.log("Creating users table...");
@@ -28,7 +29,7 @@ const initDb = async () => {
         );
     `);
 
-    console.log("Creating posts table...");
+    console.log("Creating comida table...");
 
     await pool.query(`
         CREATE TABLE posts (
@@ -40,10 +41,10 @@ const initDb = async () => {
         );
     `);
 
-    console.log("Creating post_images table...");
+    console.log("Creating comida_images table...");
 
     await pool.query(`
-        CREATE TABLE post_images (
+        CREATE TABLE comida_images (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             image VARCHAR(100) NOT NULL,
             postId INT UNSIGNED NOT NULL,
