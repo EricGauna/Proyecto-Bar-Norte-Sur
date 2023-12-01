@@ -1,74 +1,81 @@
 require("dotenv").config();
+const morgan = require("morgan")
+const path = require('path');
 const cors = require("cors");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 
-// Requerimos los controllers de los posts
-const {
-  getPosts,
-  createPost,
-  deletePost,
-  editPost,
-  getPost,
-} = require("./controllers/posts");
+const { PORT } = process.env;
 
-// Requerimos los controllers de los users
+// Cotrollers
+const {
+  createUsers,
+  loginUsers,
+  DeleteUser,
+} = require("./Controllers/users");
 
 const {
-  createUser,
-  loginUser,
-  activateUser,
-  deleteUser,
-} = require("./controllers/users");
+  createProblemas,
+  getProblemas,
+  toogleStatus,
+  deleteProblemas,
+  editProblemas,
+  getProblemasImage,
+  getAllProblemas,
+} = require("./Controllers/problemas");
 
-// Requerimos los controllers de los likes
+// Middlewares
 
-const { togglePostLike } = require("./controllers/likes");
-
-// Requerimos los middlewares
 const {
-  handleError,
-  handleNotFound,
-  validateAuth,
-  checkAdmin,
-} = require("./middlewares");
+  handle404,
+  handleErrors,
+  Admin,
+} = require("./Middlewares");
+const validateAuth = require("./Middlewares/validAuth");
+const {
+  ToggleLike, getAllLikes,
+} = require("./Controllers/likes");
+const { getAllImages } = require("./utils");
 
 const app = express();
 
-// Nos traemos el PORT del .env
-const { PORT } = process.env;
-
 app.use(
   cors({
-    origin: ["http://127.0.0.1:5500"],
+    origin: ["http://localhost:3000"],
   })
 );
-
-// Middleware que codifica y parsea el body para que podamos acceder a él en la propiedad req.body
+app.use('/images', express.static(path.join(__dirname, 'Uploads')));
 app.use(express.json());
 app.use(fileUpload());
+app.use(morgan('dev'))
 
-// Endpoints de los posts
-app.get("/posts", getPosts);
-app.get("/posts/:id", getPost);
-app.post("/posts", validateAuth, createPost);
-app.delete("/posts/:id", validateAuth, deletePost);
-app.put("/posts/:id", validateAuth, editPost);
-app.post("/posts/:id/like", validateAuth, togglePostLike);
+// Endpoints usuarios:
 
-// Endpoints de los usuarios
-app.post("/users", createUser);
-app.post("/login", loginUser);
-app.get("/activate/:registrationCode", activateUser);
-// Este endpoint es solo para usuarios administradores. No lo vimos en clase, pero os dejo el ejemplo
-app.delete("/users/:id", validateAuth, checkAdmin, deleteUser);
+app.post("/registeruser", createUsers);
+app.delete("/user/:id", validateAuth, Admin, DeleteUser);
+app.post("/login", loginUsers);
+app.get("/user/like", validateAuth, getAllLikes)
 
-// Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
-app.use(handleNotFound);
+// Endpoints problemas:
 
-// Middleware de errores. Si algún endpoint hace un next(error), la petición viene directamente a este middleware
-app.use(handleError);
+app.get('/images', getAllImages)
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+app.post("/createproblema", validateAuth, Admin, createProblemas);
+app.delete("/problemas/:id", validateAuth, Admin, deleteProblemas);
+app.get("/problemas", getAllProblemas);
+app.get("/search", getProblemas)
+app.get("/problemas/:id", getProblemasImage);
+app.post("/problemas/:id/like", validateAuth, ToggleLike);
+app.put("/problemas/:id/edit", validateAuth, Admin, editProblemas)
+app.put("/problemas/:id/status", validateAuth, Admin, toogleStatus);
+
+app.use(handle404);
+
+app.use(handleErrors);
+
+app.listen( PORT, () => {
+  console.log(
+    "Server listening on port:",
+    ` ${ PORT }`
+  );
 });

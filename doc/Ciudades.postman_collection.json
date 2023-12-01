@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "d24d8ec0-61e2-42b4-93c4-af2f5759fda7",
+		"name": "Ciudades",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24930746"
+	},
+	"item": [
+		{
+			"name": "Resgister User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"email\" : \"roberto@gmail.com\",\n        \"password\" : \"123456\",\n        \"name\" : \"roberto\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/registeruser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registeruser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login usuario",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"email\" : \"Martina@email.com\",\n        \"password\" : \"123456\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Toogle Like Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc4MDQ5MjMyLCJleHAiOjE2Nzg2NTQwMzJ9.xlV4qAcVWcttXpAFqY7lRSyDEkXFxQ5V4KE9fkrMdlQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/problemas/3/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas",
+						"3",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Problema",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDQ5ODQ5LCJleHAiOjE2NzgwNTQ2NDl9.TA7-7n2uAKf2VmJORjqVU4aG8Fi7GLtuPyerbip6rxc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Cierre al trafico",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "barrio",
+							"value": "Cortes",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "Madrid",
+							"type": "text"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"Imagenes Proyecto/cierre-al-trafico-de-41076069.jpeg",
+								"Imagenes Proyecto/cierre-al-trafico-de-41076071.jpeg",
+								"Imagenes Proyecto/cierre-al-trafico-de-41076072.jpeg",
+								"Imagenes Proyecto/cierre-al-trafico-de-la-calle-san-miguel-de-zaragoza-por-obras.jpeg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/createproblema",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createproblema"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Problema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/problemas/45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas",
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Problemas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/problemas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Images",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDE3ODM3LCJleHAiOjE2Nzc2MjI2Mzd9.dqZrFv0N8upI5cAIOHFBo0rEfuE2NmYqoiobt149nCw",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "image/jpeg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Obras en la acera",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Obras en la esquina de Panaderos con Gamazo, llevan 4 dias trabajando y queda mucho por hacer",
+							"type": "text"
+						},
+						{
+							"key": "barrio",
+							"value": "Lavapies",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "Madrid",
+							"type": "text"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"Imagenes Proyecto/Obras en la acera.jpeg",
+								"Imagenes Proyecto/Acera rota.jpeg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/images/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"images",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Likes Usuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc4MDQ5MjMyLCJleHAiOjE2Nzg2NTQwMzJ9.xlV4qAcVWcttXpAFqY7lRSyDEkXFxQ5V4KE9fkrMdlQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"email\" : \"Lucas@email.com\",\n        \"password\" : \"123456\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Users",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Problemas ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDQ5ODQ5LCJleHAiOjE2NzgwNTQ2NDl9.TA7-7n2uAKf2VmJORjqVU4aG8Fi7GLtuPyerbip6rxc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/problemas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Status Admin",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5MTcyMDEzLCJleHAiOjE2Nzk3NzY4MTN9.186FQMt1OwNaKWLqJ3n9GjoL08zA86zUgK0qhifkZK8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/problemas/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Problema",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDQ5ODQ5LCJleHAiOjE2NzgwNTQ2NDl9.TA7-7n2uAKf2VmJORjqVU4aG8Fi7GLtuPyerbip6rxc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Cierre al trafico",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Cierre al trafico por botellon",
+							"type": "text"
+						},
+						{
+							"key": "barrio",
+							"value": "Cortes",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "Madrid",
+							"type": "text"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"Imagenes Proyecto/Cortes de agua en Ponzano.jpg",
+								"Imagenes Proyecto/Cortes de agua en Ponzano2.jpg",
+								"Imagenes Proyecto/Cortes de agua en Ponzano3.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/problemas/3/edit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"problemas",
+						"3",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

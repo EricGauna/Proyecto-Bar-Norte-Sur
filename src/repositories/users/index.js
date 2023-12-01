@@ -1,15 +1,13 @@
-const selectUserByEmail = require("./selectUserByEmail");
 const insertUser = require("./insertUser");
-const deleteRegistrationCode = require("./deleteRegistrationCode");
-const selectUserByRegistrationCode = require("./selectUserByRegistrationCode");
-const selectUserById = require("./selectUserById");
-const deleteUserById = require("./deleteUserById");
+const selectUserByemail = require("./selectUserByemail");
+const SelectUserId = require("./SelectUserId");
+const DeleteUserDB = require("./DeleteUserDB");
+
 
 module.exports = {
-  selectUserByEmail,
   insertUser,
-  deleteRegistrationCode,
-  selectUserByRegistrationCode,
-  selectUserById,
-  deleteUserById,
+  selectUserByemail,
+  SelectUserId,
+  DeleteUserDB,
 };
+

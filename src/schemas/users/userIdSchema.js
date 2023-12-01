@@ -1,5 +1,7 @@
 const Joi = require("joi");
 
-const userIdSchema = Joi.number().positive().required();
+const UserIdSchema = Joi.number()
+  .positive()
+  .required();
 
-module.exports = userIdSchema;
+module.exports = UserIdSchema;

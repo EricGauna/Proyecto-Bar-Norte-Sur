@@ -1,5 +1,13 @@
-const insertLike = require("./insertLike");
-const deleteLike = require("./deleteLike");
-const selectLikeByPostAndUser = require("./selectLikeByPostAndUser");
+const addLike = require("./addLike");
+const removeLike = require("./removeLike")
+const selectLikeProblemaUser = require("./selectLikeProblemaUser")
+const selectAllLikes =require("./selectAllLikes")
 
-module.exports = { insertLike, deleteLike, selectLikeByPostAndUser };
+
+
+module.exports = {
+  addLike,
+  removeLike,
+  selectLikeProblemaUser,
+  selectAllLikes,
+};

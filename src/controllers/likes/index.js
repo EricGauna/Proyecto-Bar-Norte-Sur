@@ -1,3 +1,4 @@
-const togglePostLike = require("./togglePostLike");
+const ToggleLike = require("./ToggleLike");
+const getAllLikes = require("./getAllLikes")
 
-module.exports = { togglePostLike };
+module.exports = { ToggleLike, getAllLikes };

@@ -1,6 +1,11 @@
-const createUser = require("./createUser");
-const loginUser = require("./loginUser");
-const activateUser = require("./activateUser");
-const deleteUser = require("./deleteUser");
+const createUsers = require("./createUsers")
+const loginUsers = require("./loginUsers");
+const DeleteUser=require("./DeleteUser")
 
-module.exports = { createUser, loginUser, activateUser, deleteUser };
+
+
+module.exports = {
+  createUsers,
+  loginUsers,
+  DeleteUser
+};

@@ -1,5 +1,10 @@
-const createUserSchema = require("./createUserSchema");
-const loginUserSchema = require("./loginUserSchema");
-const userIdSchema = require("./userIdSchema");
+const createUserSchema = require("./createUserSchema")
+const loginSchema = require("./loginSchema")
+const UserIdSchema=require("./UserIdSchema")
 
-module.exports = { createUserSchema, loginUserSchema, userIdSchema };
+
+module.exports = {
+  createUserSchema,
+  loginSchema,
+  UserIdSchema,
+};

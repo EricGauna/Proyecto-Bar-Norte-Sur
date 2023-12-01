@@ -1,5 +1,6 @@
-const generateError = require("./generateError");
-const processAndSaveImage = require("./processAndSaveImage");
-const sendMail = require("./sendMail");
+const generateErrors = require("./generateErrors");
+const addImage = require("./addImage");
+const deleteImage = require("./deleteImage")
+const getAllImages = require("./getAllImages")
 
-module.exports = { generateError, processAndSaveImage, sendMail };
+module.exports = { generateErrors, addImage, deleteImage, getAllImages };
