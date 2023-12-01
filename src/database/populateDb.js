@@ -47,7 +47,7 @@ const populateDb = async () => {
     console.log("Inserting likes...");
 
     await pool.query(`
-        INSERT INTO likes (postId, userId) VALUES 
+        INSERT INTO likes (comidaId, userId) VALUES 
         (1, 2),
         (1, 3),
         (2, 1)
@@ -55,10 +55,10 @@ const populateDb = async () => {
 console.log("Inserting comidasImages...");
 
       await pool.query(`
-    INSERT INTO problemas_images (images, comidaId) VALUES 
-("croquetas-precocinadas-elegir.jpg", 2),
-    ("hamburguesas-caseras-receta.jpg", 1),
-    ("ensalda mixta.jpeg", 3)
+    INSERT INTO comida_images (image, comidaId) VALUES 
+        ("croquetas-precocinadas-elegir.jpg", 2),
+        ("hamburguesas-caseras-receta.jpg", 1),
+        ("ensalda mixta.jpeg", 3)
     `);
     console.log("¡All done! 🚀");
   } catch (error) {

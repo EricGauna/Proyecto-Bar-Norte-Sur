@@ -12,9 +12,9 @@ const initDb = async () => {
     console.log("Deleting tables...");
 
     await pool.query("DROP TABLE IF EXISTS likes;");
-    await pool.query("DROP TABLE IF EXISTS comida_images;");
-    await pool.query("DROP TABLE IF EXISTS comida_comentarios;");
-    await pool.query("DROP TABLE IF EXISTS comida;");
+    await pool.query("DROP TABLE IF EXISTS comidas_images;");
+    await pool.query("DROP TABLE IF EXISTS comidas_comentarios;");
+    await pool.query("DROP TABLE IF EXISTS comidas;");
     await pool.query("DROP TABLE IF EXISTS users;");
 
     console.log("Creating users table...");
@@ -34,7 +34,7 @@ const initDb = async () => {
     console.log("Creating comida table...");
 
     await pool.query(`
-        CREATE TABLE comida (
+        CREATE TABLE comidas (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(200) NOT NULL,
             description VARCHAR(5000) NOT NULL,
@@ -46,7 +46,7 @@ const initDb = async () => {
     console.log("Creating comida_images table...");
 
     await pool.query(`
-        CREATE TABLE comida_images (
+        CREATE TABLE comidas_images (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             image VARCHAR(100) NOT NULL,
             comidaId INT UNSIGNED NOT NULL,
@@ -57,7 +57,7 @@ const initDb = async () => {
     console.log("Creating comida_comentarios table...");
 
     await pool.query(`
-        CREATE TABLE likes (
+        CREATE TABLE comidas_comentarios (
           id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
           comentario TEXT,
           userId INT UNSIGNED NOT NULL,
