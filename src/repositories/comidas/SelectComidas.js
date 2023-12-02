@@ -1,10 +1,10 @@
 const getPool = require("../../Database/getPool");
 
-const SelectProblemas = async (queryParams) => {
+const SelectComidas = async (queryParams) => {
   const pool = getPool();
 
   let sqlQuery =
-    "SELECT p.*, COUNT(l.id) likes FROM problemas p LEFT JOIN likes l ON p.id = l.problemasId";
+    "SELECT p.*, COUNT(l.id) likes FROM comidas p LEFT JOIN likes l ON p.id = l.comidasId";
   let values = [];
   let clause = "WHERE";
   for (const key in queryParams) {
@@ -18,12 +18,12 @@ const SelectProblemas = async (queryParams) => {
 
   sqlQuery += " GROUP BY p.id;";
 
-  const [problemas] = await pool.query(
+  const [comidas] = await pool.query(
     sqlQuery,
     values
   );
 
-  return problemas;
+  return comidas;
 };
 
-module.exports = SelectProblemas;
+module.exports = SelectComidas;

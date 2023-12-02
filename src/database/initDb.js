@@ -75,7 +75,7 @@ const initDb = async () => {
         CREATE TABLE pedidos (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             comidasId INT UNSIGNED NOT NULL,
-            estado ENUM('preparando', 'entregando', 'entregado') DEFAULT 'preparando',
+            estado ENUM('preparando', 'entregando', 'listo') DEFAULT 'preparando',
             FOREIGN KEY (comidasId) REFERENCES comidas (id) ON DELETE CASCADE
         );
     `);

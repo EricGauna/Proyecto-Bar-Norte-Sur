@@ -1,17 +1,17 @@
 const getPool = require("../../Database/getPool");
 
-const SelectProblemasId = async (id) => {
+const SelectComidasId = async (id) => {
   const pool = getPool();
 
-  const [[problema]] = await pool.query(
-    "SELECT p.*, COUNT(l.id) likes FROM problemas p LEFT JOIN likes l ON p.id = l.problemasId WHERE p.id = ?;",
+  const [[comida]] = await pool.query(
+    "SELECT p.*, COUNT(l.id) likes FROM comidas p LEFT JOIN likes l ON p.id = l.comidasId WHERE p.id = ?;",
     [id]
   );
-  if (!problema.id === null) {
-    throw new Error(`No se encontró ningún problema con el id ${id}`);
+  if (!comida.id === null) {
+    throw new Error(`No se encontró ninguna comida con el id ${id}`);
   }
 
-  return problema;
+  return comida;
 };
 
-module.exports = SelectProblemasId;
+module.exports = SelectComidasId;

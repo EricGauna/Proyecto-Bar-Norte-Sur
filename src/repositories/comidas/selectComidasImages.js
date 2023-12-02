@@ -1,14 +1,14 @@
 const getPool = require("../../Database/getPool");
 
-const selectProblemasImages = async (id) => {
+const selectComidasImages = async (id) => {
   const pool = getPool();
 
-  const [problemasImages] = await pool.query(
-    "SELECT * FROM problemas_images WHERE problemaId = ?",
+  const [comidasImages] = await pool.query(
+    "SELECT * FROM comidas_images WHERE comidaId = ?",
     [id]
   );
 
-  return problemasImages;
+  return comidasImages;
 };
 
-module.exports = selectProblemasImages;
+module.exports = selectComidasImages;
