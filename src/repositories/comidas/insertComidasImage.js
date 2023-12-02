@@ -1,17 +1,17 @@
 const getPool = require("../../Database/getPool");
 
-const insertProblemasImage = async (
+const insertComidasImage = async (
   images,
   problemasId
 ) => {
   const pool = getPool();
 
   const [{ insertId }] = await pool.query(
-    "INSERT INTO problemas_images (images, problemaId) VALUES (?, ?);",
-    [images, problemasId]
+    "INSERT INTO comidas_images (images, comidaId) VALUES (?, ?);",
+    [images, comidasId]
   );
 
   return insertId;
 };
 
-module.exports = insertProblemasImage;
+module.exports = insertComidasImage;

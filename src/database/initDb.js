@@ -14,6 +14,8 @@ const initDb = async () => {
     await pool.query("DROP TABLE IF EXISTS likes;");
     await pool.query("DROP TABLE IF EXISTS comidas_images;");
     await pool.query("DROP TABLE IF EXISTS comidas_comentarios;");
+    await pool.query("DROP TABLE IF EXISTS pedidos_modificaciones;");
+    await pool.query("DROP TABLE IF EXISTS pedidos;");
     await pool.query("DROP TABLE IF EXISTS comidas;");
     await pool.query("DROP TABLE IF EXISTS users;");
 
@@ -31,51 +33,75 @@ const initDb = async () => {
         );
     `);
 
-    console.log("Creating comida table...");
+    console.log("Creating comidas table...");
 
     await pool.query(`
         CREATE TABLE comidas (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(200) NOT NULL,
             description VARCHAR(5000) NOT NULL,
-            userId INT UNSIGNED NOT NULL,
-            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+            usersId INT UNSIGNED NOT NULL,
+            FOREIGN KEY (usersId) REFERENCES users (id) ON DELETE CASCADE
         );
     `);
 
-    console.log("Creating comida_images table...");
+    console.log("Creating comidas_images table...");
 
     await pool.query(`
         CREATE TABLE comidas_images (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             image VARCHAR(100) NOT NULL,
-            comidaId INT UNSIGNED NOT NULL,
-            FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
+            comidasId INT UNSIGNED NOT NULL,
+            FOREIGN KEY (comidasId) REFERENCES comidas (id) ON DELETE CASCADE
         );
     `);
 
-    console.log("Creating comida_comentarios table...");
+    console.log("Creating comidas_comentarios table...");
 
     await pool.query(`
         CREATE TABLE comidas_comentarios (
           id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-          comentario TEXT,
-          userId INT UNSIGNED NOT NULL,
-          comidaId INT UNSIGNED NOT NULL,
-          FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-          FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
+          comentario VARCHAR(5000),
+          usersId INT UNSIGNED NOT NULL,
+          comidasId INT UNSIGNED NOT NULL,
+          FOREIGN KEY (usersId) REFERENCES users (id) ON DELETE CASCADE,
+          FOREIGN KEY (comidasId) REFERENCES comidas (id) ON DELETE CASCADE
         );
     `);
 
+    console.log("Creating pedidos table...");
+
+    await pool.query(`
+        CREATE TABLE pedidos (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            comidasId INT UNSIGNED NOT NULL,
+            estado ENUM('preparando', 'entregando', 'entregado') DEFAULT 'preparando',
+            FOREIGN KEY (comidasId) REFERENCES comidas (id) ON DELETE CASCADE
+        );
+    `);
+    
+    console.log("Creating pedidos_modificaciones table...");
+    
+    await pool.query(`
+        CREATE TABLE pedidos_modificaciones (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            comentario VARCHAR(5000),
+            usersId INT UNSIGNED NOT NULL,
+            pedidosId INT UNSIGNED NOT NULL,
+            FOREIGN KEY (usersId) REFERENCES users (id) ON DELETE CASCADE,
+            FOREIGN KEY (pedidosId) REFERENCES pedidos (id) ON DELETE CASCADE
+        );
+    `);
+    
     console.log("Creating likes table...");
 
     await pool.query(`
         CREATE TABLE likes (
           id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-          userId INT UNSIGNED NOT NULL,
-          comidaId INT UNSIGNED NOT NULL,
-          FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-          FOREIGN KEY (comidaId) REFERENCES comida (id) ON DELETE CASCADE
+          usersId INT UNSIGNED NOT NULL,
+          comidasId INT UNSIGNED NOT NULL,
+          FOREIGN KEY (usersId) REFERENCES users (id) ON DELETE CASCADE,
+          FOREIGN KEY (comidasId) REFERENCES comidas (id) ON DELETE CASCADE
         );
     `);
 

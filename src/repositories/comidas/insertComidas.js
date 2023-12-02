@@ -1,16 +1,16 @@
 const getPool = require("../../Database/getPool");
 
-const insertProblemas = async (problema) => {
-  const { title, description , barrio, ciudad, userId } = problema;
+const insertComidas = async (comida) => {
+  const { title, description , userId } = comida;
 
   const pool = getPool();
 
   const [{ insertId }] = await pool.query(
-    "INSERT INTO problemas (title, description, barrio, ciudad, userId ) VALUES (?, ?, ?, ?, ?)",
-    [title, description, barrio, ciudad, userId ]
+    "INSERT INTO comidas (title, description, userId ) VALUES (?, ?, ?)",
+    [title, description, userId ]
   );
 
   return insertId;
 };
 
-module.exports = insertProblemas;
+module.exports = insertComidas;
